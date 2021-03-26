@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RenoExpress.Models.INVENTARIO>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CONSUMOAPI</title>
+</head>
+<body>
+    <Center>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.stoc_minimo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stock_maximo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PRODUCTO.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stoc_minimo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stock_maximo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PRODUCTO.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SUCURSAL.nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ACTUALIZAR", "Edit", new { id = item.id_inventario }) |
+                        @Html.ActionLink("DETALLES", "Details", new { id = item.id_inventario }) |
+                        @Html.ActionLink("ELIMINAR", "Delete", new { id = item.id_inventario })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </Center>
+</body>
+</html>

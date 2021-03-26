@@ -1,0 +1,67 @@
+﻿@model RenoExpress.Models.INVENTARIO
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DETALLES DE INVENTARIO</title>
+</head>
+<body><CENTER>
+    <div>
+        <h4>INVENTARIO</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.stoc_minimo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.stoc_minimo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.stock_maximo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.stock_maximo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cantidad)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PRODUCTO.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCTO.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SUCURSAL.nombre)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("ACTUALIZAR", "Edit", new { id = Model.id_inventario }) |
+        @Html.ActionLink("REGRESAR", "Index")
+    </p>
+</CENTER>
+</body>
+</html>

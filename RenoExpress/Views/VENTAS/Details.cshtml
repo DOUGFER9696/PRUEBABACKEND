@@ -1,0 +1,100 @@
+﻿@model IEnumerable<RenoExpress.Models.Ventas>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DETALLES DE VENTA</title>
+</head>
+<body>
+    <center>
+        <p>
+            @Html.ActionLink("VENDER MAS PRODUCTOS", "DETALLESVENTA")
+        </p>
+        <table class="table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_encabezado_factura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha_venta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_cliente_nit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_sucursal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Iva)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_detalle_factura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_producto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model._Total)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_encabezado_factura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha_venta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_cliente_nit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_sucursal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Iva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_detalle_factura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_producto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item._Total)
+                    </td>
+                    <td>
+                    
+                        @Html.ActionLink("ELIMINACION", "ELIMINARDETALLE", new { id = item.Id_detalle_factura })
+                    </td>
+                </tr>
+            }
+            <div>
+                @Html.ActionLink("REGRESAR", "Index")
+            </div>
+
+        </table>
+    </center>
+</body>
+</html>

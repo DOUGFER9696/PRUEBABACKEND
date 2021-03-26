@@ -1,0 +1,76 @@
+﻿@model RenoExpress.Models.ENCABEZADO_FACTURA
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ELIMINACION</title>
+</head>
+<body>
+    <center>
+        <h3>SEGURO DE ELIMINAR LA VENTA?</h3>
+        <div>
+            <h4>ENCABEZADO_FACTURA</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.fecha_venta)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.fecha_venta)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.iva)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.iva)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.total_venta)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.total_venta)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CLIENTE.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CLIENTE.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SUCURSAL.nombre)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="ELIMINAR" class="btn btn-default" /> |
+                    @Html.ActionLink("REGRESAR", "Index")
+                </div>
+            }
+        </div>
+     
+    </center>
+</body>
+</html>

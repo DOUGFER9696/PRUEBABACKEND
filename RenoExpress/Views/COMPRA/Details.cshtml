@@ -1,0 +1,60 @@
+﻿@model RenoExpress.Models.COMPRA
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DETALLES DE COMPRA</title>
+</head>
+<body>
+    <center>
+        <div>
+            <h4>COMPRA</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.cantidad)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cantidad)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.precio_unitario)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.precio_unitario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PRODUCTO.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCTO.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SUCURSAL.nombre)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("ACTUALIZAR", "Edit", new { id = Model.id_compra }) |
+            @Html.ActionLink("REGRESAR", "Index")
+        </p>
+    </center>
+</body>
+</html>

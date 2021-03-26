@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RenoExpressModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="id_cliente_nit" />
+    </Key>
+    <Property Name="id_cliente_nit" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="COMPRA">
+    <Key>
+      <PropertyRef Name="id_compra" />
+    </Key>
+    <Property Name="id_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_sucursal" Type="int" Nullable="false" />
+    <Property Name="id_producto" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="precio_unitario" Type="float" />
+  </EntityType>
+  <EntityType Name="DETALLE_FACTURA">
+    <Key>
+      <PropertyRef Name="id_detalle_factura" />
+    </Key>
+    <Property Name="id_detalle_factura" Type="int" Nullable="false" />
+    <Property Name="id_encabezado_factura" Type="int" Nullable="false" />
+    <Property Name="id_producto" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="total" Type="float" />
+  </EntityType>
+  <EntityType Name="ENCABEZADO_FACTURA">
+    <Key>
+      <PropertyRef Name="id_encabezado_factura" />
+    </Key>
+    <Property Name="id_encabezado_factura" Type="int" Nullable="false" />
+    <Property Name="fecha_venta" Type="date" Nullable="false" />
+    <Property Name="id_cliente_nit" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="id_sucursal" Type="int" Nullable="false" />
+    <Property Name="iva" Type="float" />
+    <Property Name="total_venta" Type="float" />
+  </EntityType>
+  <EntityType Name="INVENTARIO">
+    <Key>
+      <PropertyRef Name="id_inventario" />
+    </Key>
+    <Property Name="id_inventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_producto" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="id_sucursal" Type="int" Nullable="false" />
+    <Property Name="stoc_minimo" Type="int" Nullable="false" />
+    <Property Name="stock_maximo" Type="int" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="id_producto" />
+    </Key>
+    <Property Name="id_producto" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="400" Nullable="false" />
+    <Property Name="precio_venta" Type="float" />
+    <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SUCURSAL">
+    <Key>
+      <PropertyRef Name="id_sucursal" />
+    </Key>
+    <Property Name="id_sucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <Association Name="fk_compra_producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_compra_sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="id_sucursal" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="id_sucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_detallefactura_encabezadofactura">
+    <End Role="ENCABEZADO_FACTURA" Type="Self.ENCABEZADO_FACTURA" Multiplicity="1" />
+    <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENCABEZADO_FACTURA">
+        <PropertyRef Name="id_encabezado_factura" />
+      </Principal>
+      <Dependent Role="DETALLE_FACTURA">
+        <PropertyRef Name="id_encabezado_factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_detallefactura_producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="DETALLE_FACTURA">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Fk_id_encabezado_factura_cliente">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="ENCABEZADO_FACTURA" Type="Self.ENCABEZADO_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="id_cliente_nit" />
+      </Principal>
+      <Dependent Role="ENCABEZADO_FACTURA">
+        <PropertyRef Name="id_cliente_nit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Fk_id_encabezado_factura_SUCURSAL">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="ENCABEZADO_FACTURA" Type="Self.ENCABEZADO_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="id_sucursal" />
+      </Principal>
+      <Dependent Role="ENCABEZADO_FACTURA">
+        <PropertyRef Name="id_sucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_inventario_producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="INVENTARIO">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_inventario_sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="id_sucursal" />
+      </Principal>
+      <Dependent Role="INVENTARIO">
+        <PropertyRef Name="id_sucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RenoExpressModelStoreContainer">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COMPRA" EntityType="Self.COMPRA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ENCABEZADO_FACTURA" EntityType="Self.ENCABEZADO_FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_compra_producto" Association="Self.fk_compra_producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="COMPRA" EntitySet="COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_compra_sucursal" Association="Self.fk_compra_sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="COMPRA" EntitySet="COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_detallefactura_encabezadofactura" Association="Self.fk_detallefactura_encabezadofactura">
+      <End Role="ENCABEZADO_FACTURA" EntitySet="ENCABEZADO_FACTURA" />
+      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_detallefactura_producto" Association="Self.fk_detallefactura_producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="Fk_id_encabezado_factura_cliente" Association="Self.Fk_id_encabezado_factura_cliente">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="ENCABEZADO_FACTURA" EntitySet="ENCABEZADO_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="Fk_id_encabezado_factura_SUCURSAL" Association="Self.Fk_id_encabezado_factura_SUCURSAL">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="ENCABEZADO_FACTURA" EntitySet="ENCABEZADO_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_inventario_producto" Association="Self.fk_inventario_producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_inventario_sucursal" Association="Self.fk_inventario_sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

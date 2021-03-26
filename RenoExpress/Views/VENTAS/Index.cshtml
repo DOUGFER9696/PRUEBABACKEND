@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RenoExpress.Models.ENCABEZADO_FACTURA>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VENTAS REALIZADAS</title>
+</head>
+<body><center>
+    <p>
+        @Html.ActionLink("NUEVA VENTA", "Create")
+    </p>
+    <table class="table-responsive">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_venta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total_venta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLIENTE.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_venta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iva)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_venta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CLIENTE.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SUCURSAL.nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("ACTUALIZAR", "Edit", new { id = item.id_encabezado_factura }) |
+                    @Html.ActionLink("DETALLES DE VENTA", "Details", new { id = item.id_encabezado_factura }) |
+                    @Html.ActionLink("ELIMINAR VENTA", "Delete", new { id = item.id_encabezado_factura })
+                    @Html.ActionLink("Vender mas", "DETALLESVENTA")
+                    @Html.ActionLink("Cobrar", "COBRAR", new { id = item.id_encabezado_factura })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.ActionLink("REGRESAR", "Index","HOME")
+</center>
+</body>
+</html>

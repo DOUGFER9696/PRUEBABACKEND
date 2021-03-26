@@ -1,0 +1,69 @@
+﻿@model RenoExpress.Models.COMPRA
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ELIMINAR COMPRA</title>
+</head>
+<body>
+    <center>
+        <h3>ESTA SEGURO DE ELIMINARLO</h3>
+        <div>
+            <h4>COMPRA</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.cantidad)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cantidad)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.precio_unitario)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.precio_unitario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PRODUCTO.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCTO.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SUCURSAL.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SUCURSAL.nombre)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="ELIMINAR" class="btn btn-default" /> |
+                    @Html.ActionLink("REGRESAR", "Index")
+                </div>
+            }
+        </div>
+
+        @Html.ActionLink("REGRESAR", "Index")
+    </center>
+</body>
+</html>
